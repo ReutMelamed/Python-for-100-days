@@ -1,0 +1,89 @@
+import random
+
+stages = ['''
+	+---+
+	|   |
+	O   |
+ /|\  |
+ / \  |
+			|
+=========
+''', '''
+	+---+
+	|   |
+	O   |
+ /|\  |
+ /    |
+			|
+=========
+''', '''
+	+---+
+	|   |
+	O   |
+ /|\  |
+			|
+			|
+=========
+''', '''
+	+---+
+	|   |
+	O   |
+ /|   |
+			|
+			|
+=========''', '''
+	+---+
+	|   |
+	O   |
+	|   |
+			|
+			|
+=========
+''', '''
+	+---+
+	|   |
+	O   |
+			|
+			|
+			|
+=========
+''', '''
+	+---+
+	|   |
+			|
+			|
+			|
+			|
+=========
+''']
+
+lives = 6
+
+word_list = ["aardvark", "baboon", "camel"]
+display = []
+chosen_word = random.choice(word_list)
+word_length = len(chosen_word)
+
+for _ in range(word_length):
+  display += "_"
+
+end_of_game = False
+
+while not end_of_game:
+	guess = input("Guess a letter: ").lower()
+	i = 0
+	for letter in chosen_word:
+		if guess == letter:
+			display[i] = letter
+		i += 1
+	if guess not in chosen_word:
+		lives -= 1
+		print(stages[6-lives])
+	print("".join(display))
+	print(lives)
+	if lives == 0:
+		print("You lose")
+		break
+	if "_" not in display:
+		end_of_game = True
+		print("\n You Win!!")
